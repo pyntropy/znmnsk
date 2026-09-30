@@ -1,0 +1,13 @@
+{
+  "name": "first",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix src install",
+    "predev": "npm --prefix src install",
+    "prebuild": "npm --prefix src install",
+    "prepreview": "npm --prefix src install",
+    "dev": "npm --prefix src run dev",
+    "build": "npm --prefix src run build",
+    "preview": "npm --prefix src run preview"
+  }
+}

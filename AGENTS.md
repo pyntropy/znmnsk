@@ -2,19 +2,22 @@
 
 Vue 3 (JS, `<script setup>`) + Vite 8 + Tailwind CSS v4 SPA. Remote: git@github.com:pyntropy/znmnsk.git.
 
-**Все файлы проекта лежат в `src/`** (`package.json`, `vite.config.js`, `index.html`, компоненты). В корне — только `AGENTS.md`, `.gitignore`, `README.md` и `guides/`.
+**Все файлы проекта лежат в `src/`** (`package.json` с зависимостями, `vite.config.js`, `index.html`, компоненты). В корне — `AGENTS.md`, `.gitignore`, `README.md`, `guides/` и тонкий `package.json`-обёртка (без зависимостей, делегирует в `src/`).
 
 ## Commands
 
-Все команды запускаются **из корня** флагами `--prefix src` (без `cd`):
+Все команды — **из корня** (облако тоже запускает их из корня):
 
 ```sh
-npm --prefix src run dev      # dev server
-npm --prefix src run build    # production build; ЕДИНСТВЕННЫЙ шаг верификации (lint/test/typecheck нет)
-npm --prefix src run preview  # serve the build
+npm install        # ставит зависимости в src/node_modules (через postinstall в package.json корня)
+npm run dev        # dev server
+npm run build      # production build; ЕДИНСТВЕННЫЙ шаг верификации (lint/test/typecheck нет)
+npm run preview    # serve the build
 ```
 
-После `npm --prefix src run build` артефакты появляются в `src/dist` (уже в `.gitignore`).
+Корневой `package.json` — тонкая обёртка без зависимостей: скрипты делегируют в `src/` (`npm --prefix src`), `prebuild`/`postinstall` гарантируют установку зависимостей. Настоящие зависимости прописаны в `src/package.json`.
+
+После `npm run build` артефакты появляются в `src/dist` (уже в `.gitignore`).
 
 ## Tailwind v4 setup (non-obvious)
 
